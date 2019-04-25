@@ -5,3 +5,6 @@ dependencies:
 - name: jx-app-jenkins
   repository: http://chartmuseum.jenkins-x.io
   version: 0.0.15
+- name: jx-app-datadog
+  repository: http://chartmuseum.jenkins-x.io
+  version: 0.0.3
