@@ -1,0 +1,30 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/monocular/templates/api-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jx-app-datadog-monocular-api-config
+  labels:
+    app: jx-app-datadog-monocular
+    chart: "monocular-0.6.4"
+    release: "jx-app-datadog"
+    heritage: "Tiller"
+data:
+  monocular.yaml: |-
+    mongodb:
+      url: jx-app-datadog-mongodb:27017
+      database: monocular
+    cacheRefreshInterval: 30
+    cors:
+      allowed_headers:
+      - content-type
+      - x-xsrf-token
+      allowed_origins:
+      - ""
+    releasesEnabled: false
+    repos:
+    - name: chartmuseum
+      source: https://github.com/jenkins-x/jenkins-x-platform
+      url: http://jenkins-x-chartmuseum:8080
+    tillerNamespace: kube-system
+    

@@ -1,0 +1,15 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/controllerteam/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: controllerteam
+  namespace: jx
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: controllerteam
+subjects:
+- kind: ServiceAccount
+  name: jx-app-datadog-controllerteam
+  namespace: jx

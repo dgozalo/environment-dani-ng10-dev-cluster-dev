@@ -1,0 +1,15 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/chartmuseum/templates/pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: jx-app-datadog-chartmuseum
+  labels:
+    app: jx-app-datadog-chartmuseum
+    release: "jx-app-datadog"
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "8Gi"

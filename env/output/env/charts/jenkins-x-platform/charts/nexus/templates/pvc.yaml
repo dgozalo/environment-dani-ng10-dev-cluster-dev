@@ -1,0 +1,18 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/nexus/templates/pvc.yaml
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: jx-app-datadog-nexus
+  labels:
+    app: nexus
+    chart: "nexus-0.1.7"
+    release: "jx-app-datadog"
+    heritage: "Tiller"
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "8Gi"

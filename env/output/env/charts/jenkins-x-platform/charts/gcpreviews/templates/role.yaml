@@ -1,0 +1,26 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/gcpreviews/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: gcpreviews
+rules:
+- apiGroups:
+  - jenkins.io
+  resources:
+  - environments
+  verbs:
+  - list
+  - get
+  - patch
+  - update
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - list
+  - get
+  - watch
+

@@ -1,0 +1,48 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/controllerteam/templates/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: controllerteam-jx
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - watch
+  - list
+  - create
+  - patch
+  - update
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - get
+  - create
+  - patch
+  - update
+  - list
+- apiGroups:
+  - jenkins.io
+  resources:
+  - teams
+  - users
+  verbs:
+  - list
+  - get
+  - watch
+  - patch
+  - update
+- apiGroups:
+  - jenkins.io
+  resources:
+  - users
+  verbs:
+  - list
+  - get
+  - watch
+

@@ -1,0 +1,45 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/controllerrole/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jx-app-datadog-controllerrole
+  labels:
+    app: controllerrole
+    chart: controllerrole-2.0.33
+    release: jx-app-datadog
+    heritage: Tiller
+spec:
+  backoffLimit: 5
+  activeDeadlineSeconds: 300
+  selector:
+    matchLabels:
+      app: controllerrole
+      release: jx-app-datadog
+  template:
+    metadata:
+      labels:
+        app: controllerrole
+        release: jx-app-datadog
+    spec:
+      restartPolicy: Always
+      serviceAccountName: jx-app-datadog-controllerrole
+      containers:
+        - name: controllerrole
+          command: [jx]
+          args:
+          - controller
+          - role
+          
+          imagePullPolicy: IfNotPresent
+          image: "jenkinsxio/jx:2.0.33"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          env:
+          - name: JX_LOG_FORMAT
+            value: json
+          resources:
+            {}
+            

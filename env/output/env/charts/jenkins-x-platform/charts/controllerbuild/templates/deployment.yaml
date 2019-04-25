@@ -1,0 +1,54 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/controllerbuild/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jx-app-datadog-controllerbuild
+  labels:
+    app: controllerbuild
+    chart: controllerbuild-2.0.33
+    release: jx-app-datadog
+    heritage: Tiller
+spec:
+  backoffLimit: 5
+  activeDeadlineSeconds: 300
+  selector:
+    matchLabels:
+      app: controllerbuild
+      release: jx-app-datadog
+  template:
+    metadata:
+      labels:
+        app: controllerbuild
+        release: jx-app-datadog
+    spec:
+      restartPolicy: Always
+      serviceAccountName: jx-app-datadog-controllerbuild
+      containers:
+        - name: controllerbuild
+          command: [jx]
+          args:
+          - controller
+          - build
+          - --batch-mode
+          - --git-credentials
+          - --verbose
+          
+          imagePullPolicy: IfNotPresent
+          image: "gcr.io/jenkinsxio/builder-go:0.1.419"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          env:
+          - name: GIT_AUTHOR_EMAIL
+            value: jenkins-x@googlegroups.com
+          - name: GIT_AUTHOR_NAME
+            value: jenkins-x-bot
+          - name: JX_LOG_FORMAT
+            value: json
+          - name: XDG_CONFIG_HOME
+            value: /home/jenkins
+          resources:
+            {}
+            

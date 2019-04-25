@@ -1,0 +1,117 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/jenkins/templates/config.yaml
+
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins
+data:
+  config.xml: |-
+    <?xml version='1.0' encoding='UTF-8'?>
+    <hudson>
+      <disabledAdministrativeMonitors/>
+      <version>0.0.53</version>
+      <numExecutors>0</numExecutors>
+      <mode>NORMAL</mode>
+      <useSecurity>true</useSecurity>
+      <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
+          <denyAnonymousReadAccess>true</denyAnonymousReadAccess>
+      </authorizationStrategy>
+      <securityRealm class="hudson.security.LegacySecurityRealm">
+      </securityRealm>
+      <disableRememberMe>false</disableRememberMe>
+      <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
+      <workspaceDir>${JENKINS_HOME}/workspace/${ITEM_FULLNAME}</workspaceDir>
+      <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
+      <markupFormatter class="hudson.markup.EscapedMarkupFormatter"/>
+      <jdks/>
+      <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
+      <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
+      <clouds>
+        <org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud plugin="kubernetes@0.11">
+          <name>kubernetes</name>
+          <templates>
+          </templates><serverUrl>https://kubernetes.default</serverUrl>
+          <skipTlsVerify>false</skipTlsVerify>
+          <namespace>jx</namespace>
+          <jenkinsUrl>http://jenkins:8080</jenkinsUrl>
+          <jenkinsTunnel>jenkins-agent:50000</jenkinsTunnel>
+          <containerCap>0</containerCap>
+          <retentionTimeout>5</retentionTimeout>
+          <connectTimeout>0</connectTimeout>
+          <readTimeout>0</readTimeout>
+        </org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud>
+      </clouds>
+      <quietPeriod>5</quietPeriod>
+      <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+      <primaryView>All</primaryView>
+      <slaveAgentPort>50000</slaveAgentPort>
+      <label></label>
+      <nodeProperties/>
+      <globalNodeProperties>
+        <hudson.slaves.EnvironmentVariablesNodeProperty>
+          <envVars serialization="custom">
+            <unserializable-parents/>
+            <tree-map>
+              <default>
+                <comparator class="hudson.util.CaseInsensitiveComparator"/>
+              </default>
+              <int>2</int>
+              <string>DOCKER_REGISTRY</string>
+              <string></string>
+              <string>TILLER_NAMESPACE</string>
+              <string></string>
+            </tree-map>
+          </envVars>
+        </hudson.slaves.EnvironmentVariablesNodeProperty>
+      </globalNodeProperties>
+      <noUsageStatistics>true</noUsageStatistics>
+    </hudson>
+  org.jenkinsci.plugins.github_branch_source.GitHubConfiguration.xml: |-
+    <?xml version='1.1' encoding='UTF-8'?>
+    <org.jenkinsci.plugins.github__branch__source.GitHubConfiguration plugin="github-branch-source@2.3.2">
+      <endpoints>
+      </endpoints>
+    </org.jenkinsci.plugins.github__branch__source.GitHubConfiguration>
+  com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig.xml: |-
+    <?xml version='1.1' encoding='UTF-8'?>
+    <com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig plugin="gitlab-plugin@1.5.5">
+      <useAuthenticatedEndpoint>true</useAuthenticatedEndpoint>
+      <connections>
+      </connections>
+    </com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig>
+  com.cloudbees.jenkins.plugins.bitbucket.endpoints.BitbucketEndpointConfiguration.xml: |-
+    <?xml version='1.1' encoding='UTF-8'?>
+    <com.cloudbees.jenkins.plugins.bitbucket.endpoints.BitbucketEndpointConfiguration plugin="cloudbees-bitbucket-branch-source@2.2.10">
+      <endpoints>
+      </endpoints>
+    </com.cloudbees.jenkins.plugins.bitbucket.endpoints.BitbucketEndpointConfiguration>
+  org.jenkinsci.plugin.gitea.servers.GiteaServers.xml: |-
+    <?xml version='1.1' encoding='UTF-8'?>
+    <org.jenkinsci.plugin.gitea.servers.GiteaServers plugin="gitea@1.0.5">
+      <servers>
+      </servers>
+    </org.jenkinsci.plugin.gitea.servers.GiteaServers>
+  apply_config.sh: |-
+    rm -rf /var/jenkins_home/plugins
+    mkdir -p /usr/share/jenkins/ref/secrets/;
+    echo "false" > /usr/share/jenkins/ref/secrets/slave-to-master-security-kill-switch;
+    rm -rf /var/jenkins_home/com.cloudbees.jenkins.plugins.bitbucket.endpoints.BitbucketEndpointConfiguration.xml
+    ln -s /var/jenkins_config/com.cloudbees.jenkins.plugins.bitbucket.endpoints.BitbucketEndpointConfiguration.xml /var/jenkins_home/com.cloudbees.jenkins.plugins.bitbucket.endpoints.BitbucketEndpointConfiguration.xml
+    rm -rf /var/jenkins_home/org.jenkinsci.plugin.gitea.servers.GiteaServers.xml
+    ln -s /var/jenkins_config/org.jenkinsci.plugin.gitea.servers.GiteaServers.xml /var/jenkins_home/org.jenkinsci.plugin.gitea.servers.GiteaServers.xml
+    rm -rf /var/jenkins_home/com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig.xml
+    ln -s /var/jenkins_config/com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig.xml /var/jenkins_home/com.dabsquared.gitlabjenkins.connection.GitLabConnectionConfig.xml
+    rm -rf /var/jenkins_home/org.jenkinsci.plugins.github_branch_source.GitHubConfiguration.xml
+    ln -s /var/jenkins_config/org.jenkinsci.plugins.github_branch_source.GitHubConfiguration.xml /var/jenkins_home/org.jenkinsci.plugins.github_branch_source.GitHubConfiguration.xml
+  plugins.txt: |-

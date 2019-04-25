@@ -1,0 +1,17 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/docker-registry/templates/pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: jx-app-datadog-docker-registry
+  labels:
+    app: jx-app-datadog-docker-registry
+    chart: "docker-registry-1.5.0"
+    release: "jx-app-datadog"
+    heritage: "Tiller"
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "100Gi"

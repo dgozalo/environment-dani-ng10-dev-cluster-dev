@@ -1,0 +1,19 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/heapster/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: heapster
+  labels:
+    chart: "heapster-0.3.2"
+    app: jx-app-datadog-heapster
+    heritage: "Tiller"
+    release: "jx-app-datadog"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8082
+    targetPort: 8082
+    protocol: TCP
+  selector:
+    app: jx-app-datadog-heapster

@@ -1,0 +1,26 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/gcpreviews/templates/clusterrole.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: gcpreviews-jx
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - pods/portforward
+  verbs:
+  - get
+  - delete
+  - list
+  - create
+

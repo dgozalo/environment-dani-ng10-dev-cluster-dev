@@ -1,0 +1,19 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/heapster/templates/pod-nanny-rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: jx-app-datadog-heapster-pod-nanny
+  labels:
+    app: heapster
+    chart: heapster-0.3.2
+    heritage: Tiller
+    release: jx-app-datadog
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: jx-app-datadog-heapster-pod-nanny
+subjects:
+- kind: ServiceAccount
+  name: jx-app-datadog-heapster
+  namespace: jx

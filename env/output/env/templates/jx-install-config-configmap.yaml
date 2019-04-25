@@ -1,0 +1,37 @@
+---
+# Source: env/templates/jx-install-config-configmap.yaml
+apiVersion: v1
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIDCzCCAfOgAwIBAgIQCuRgQLiLNqRE9xOggoDg0DANBgkqhkiG9w0BAQsFADAv
+    MS0wKwYDVQQDEyQzZDAyZDc5ZC1iNTdmLTQ0MjAtYjI1MC0xYzAyMDUwNmU3N2Mw
+    HhcNMTkwNDI1MTA1MTUzWhcNMjQwNDIzMTE1MTUzWjAvMS0wKwYDVQQDEyQzZDAy
+    ZDc5ZC1iNTdmLTQ0MjAtYjI1MC0xYzAyMDUwNmU3N2MwggEiMA0GCSqGSIb3DQEB
+    AQUAA4IBDwAwggEKAoIBAQDD7oRjvLNaSwMwPyhHbRc/GmWyILyPTa0jkG8d8uu2
+    97+OOdcbUEQwEyfu7//dms83oap5P5rOrwM0x8bs+1dBaSZG36jYnmt3kQQfhPp4
+    A1r9fSkDnpJoGBBMr8rA9n3iG/36fdaHXEEwh0B3QOXgh+ndogo/douRtux7ZLrk
+    CXrwaPYfZfLoeR2KkkhL1eKPUwCT330U155Br8ByfD9VvXhpHsk2lDFfTSAZ0F+F
+    dihVet4fSQ5afiQ46meKzJRf7vuTfUmhbmnOkTlXeVEYhplzlX/u4Ez5O2kN+6O1
+    grvZyStdMFKzkO7q2oI/AfanKz5CAP0nqT9R+Ohc+ff1AgMBAAGjIzAhMA4GA1Ud
+    DwEB/wQEAwICBDAPBgNVHRMBAf8EBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQCV
+    PMaIw7F+doFDFnNxlfjxhDd3ui1ctKgbxEbLKl2n8bNKX20utdTtk4NE4kGgl9wH
+    8CTya3Jf5VdaL4EbNE0MAmwXRFmTGgJmf5v/uGCJalGsljjcinBjHdEOVqAi4+cZ
+    aRMJMXuL2Vw7WrN3p90ELUht7S8CgEfR2FGQpzXb5704p5XaNCAahBH/tTUijrMx
+    Xw6yfMyfJohjg90wNzQs8/NBxNSDHZrahGpDkhOR+N32C8eyuIBzIqEvrlULfDpe
+    5kg+Ru6Dzad9j0NO1J67aqKLAH5CLZ4kruJoZ2d7A7qnbrlcEX+Qxrkql/PThzV5
+    4RBfvixzSeEOSHipAlIB
+    -----END CERTIFICATE-----
+  clusterName: dani-ng10-dev-cluster
+  jx-install-version: 2.0.0-dev+92799d02c
+  kubeProvider: gke
+  projectID: apps-dev-229310
+  region: ""
+  secretsLocation: vault
+  server: https://35.205.95.54
+  systemVaultName: jx-vault-dani-ng10-dev
+  zone: europe-west1-b
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: jx-install-config

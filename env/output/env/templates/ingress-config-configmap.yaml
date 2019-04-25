@@ -1,0 +1,15 @@
+---
+# Source: env/templates/ingress-config-configmap.yaml
+apiVersion: v1
+data:
+  clusterissuer: "false"
+  domain: 35.240.45.175.nip.io
+  email: ""
+  exposer: Ingress
+  issuer: ""
+  tls: "false"
+  urltemplate: ""
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: ingress-config

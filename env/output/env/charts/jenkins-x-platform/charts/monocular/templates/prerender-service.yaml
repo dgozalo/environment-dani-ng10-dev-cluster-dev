@@ -1,0 +1,17 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/monocular/templates/prerender-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: jx-app-datadog-monocular-prerender
+  labels:
+    chart: "monocular-0.6.4"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+    name: prerender
+  selector:
+    app: jx-app-datadog-monocular-prerender

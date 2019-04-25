@@ -1,0 +1,42 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/gcpreviews/templates/cronjob.yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: jx-app-datadog-gcpreviews
+  labels:
+    app: gcpreviews
+    chart: gcpreviews-2.0.33
+    release: jx-app-datadog
+    heritage: Tiller
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
+  schedule: "0 */3 * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: gcpreviews
+            release: jx-app-datadog
+        spec:
+          restartPolicy: Never
+          serviceAccountName: jx-app-datadog-gcpreviews
+          containers:
+            - name: gcpreviews
+              command: [jx]
+              args:
+              - gc
+              - previews
+              - --batch-mode
+              
+              imagePullPolicy: IfNotPresent
+              image: "gcr.io/jenkinsxio/builder-go:0.1.419"
+              env:
+              - name: JX_LOG_FORMAT
+                value: json
+              resources:
+                {}
+            

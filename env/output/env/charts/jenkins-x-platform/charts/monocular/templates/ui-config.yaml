@@ -1,0 +1,21 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/monocular/templates/ui-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jx-app-datadog-monocular-ui-config
+  labels:
+    app: jx-app-datadog-monocular
+    chart: "monocular-0.6.4"
+    release: "jx-app-datadog"
+    heritage: "Tiller"
+data:
+  overrides.js: |-
+    window.monocular = {
+      overrides: {
+        googleAnalyticsId: 'UA-XXXXXX-X',
+        appName: 'Jenkins X Apps',
+        backendHostname: '/api',
+        releasesEnabled: false
+      }
+    };

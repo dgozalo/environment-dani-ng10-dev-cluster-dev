@@ -1,0 +1,15 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/controllerworkflow/templates/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: controllerworkflow-jx
+  namespace: jx
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: controllerworkflow-jx
+subjects:
+- kind: ServiceAccount
+  name: jx-app-datadog-controllerworkflow
+  namespace: jx

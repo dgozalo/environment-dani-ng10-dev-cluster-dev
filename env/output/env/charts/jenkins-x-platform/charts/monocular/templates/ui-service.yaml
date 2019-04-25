@@ -1,0 +1,23 @@
+---
+# Source: env/charts/jenkins-x-platform/charts/monocular/templates/ui-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: jx-app-datadog-monocular-ui
+  labels:
+    chart: "monocular-0.6.4"
+  annotations:
+    fabric8.io/expose: "true"
+    fabric8.io/ingress.name: monocular
+    fabric8.io/ingress.path: /
+    jenkins-x.io/skip.tls: "true"
+    
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: monocular-ui
+  selector:
+    app: jx-app-datadog-monocular-ui
