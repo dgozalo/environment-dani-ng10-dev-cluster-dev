@@ -1,9 +1,0 @@
----
-# Source: env/charts/jenkins-x-platform/charts/jenkins/templates/jenkins-x-git-kinds-cm.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: "jenkins-x-git-kinds"
-data:
-  github: |-
-  gitea: |-
