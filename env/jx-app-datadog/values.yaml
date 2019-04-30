@@ -1,4 +1,0 @@
-datadog:
-  apiKey: vault:gitOps/dgozalo/environment-dani-ng10-dev-cluster-dev/datadog-apikey-secret:token-passthrough
-  logEnabled: false
-  logsConfigContainerCollectAll: false
