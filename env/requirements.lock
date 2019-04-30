@@ -5,6 +5,5 @@ dependencies:
 - name: jx-app-datadog
   repository: http://chartmuseum.jenkins-x.io
   version: 0.0.3
-- name: jx-app-jacoco
-  repository: http://chartmuseum.jenkins-x.io
-  version: 0.0.123
+digest: sha256:aab5270afa8a79dc1831f9a166cfae6a81a9310d57dc4948389e38e101ba2c0d
+generated: 2019-04-30T10:20:40.66763+02:00
